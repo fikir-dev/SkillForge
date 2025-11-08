@@ -5,8 +5,8 @@ function App() {
   const [selectedRole, setSelectedRole] = useState('backend-dev')
   const userName = 'Alex Morgan' // Dummy name
 
-  // Job roles configuration
-  const jobRoles = {
+  // General career roles configuration
+  const generalRoles = {
     'frontend-dev': {
       name: 'Front End Dev',
       available: true,
@@ -120,17 +120,150 @@ function App() {
         'Master concurrency patterns and parallel algorithms',
         'Study memory management and optimization techniques'
       ]
-    },
-    'coming-soon': {
-      name: 'Coming Soon',
-      available: false,
-      progress: 0,
-      skills: [],
-      recommendations: []
     }
   }
 
-  const currentRole = jobRoles[selectedRole]
+  // Company-specific roles configuration
+  const companyRoles = {
+    'meta-intern': {
+      name: 'Meta Intern',
+      available: true,
+      progress: 45,
+      skills: [
+        { name: 'React/React Native', current: 75, required: 85, status: 'needs-work' },
+        { name: 'Data Structures & Algorithms', current: 70, required: 90, status: 'needs-work' },
+        { name: 'System Design Basics', current: 50, required: 75, status: 'critical' },
+        { name: 'C++/Python', current: 65, required: 80, status: 'needs-work' },
+        { name: 'Problem Solving', current: 72, required: 85, status: 'needs-work' },
+        { name: 'Communication Skills', current: 80, required: 85, status: 'good' },
+      ],
+      recommendations: [
+        'Practice LeetCode problems daily - Meta focuses heavily on algorithms',
+        'Build a React project showcasing state management and performance optimization',
+        'Study system design fundamentals for technical interviews',
+        'Prepare behavioral questions using STAR method - Meta values culture fit'
+      ]
+    },
+    'google-developer': {
+      name: 'Google Developer',
+      available: true,
+      progress: 52,
+      skills: [
+        { name: 'Algorithms & Data Structures', current: 70, required: 90, status: 'needs-work' },
+        { name: 'System Design', current: 55, required: 85, status: 'critical' },
+        { name: 'C++/Java/Python', current: 75, required: 85, status: 'good' },
+        { name: 'Distributed Systems', current: 45, required: 80, status: 'critical' },
+        { name: 'Code Review & Best Practices', current: 65, required: 85, status: 'needs-work' },
+        { name: 'Large-Scale Systems', current: 40, required: 75, status: 'critical' },
+      ],
+      recommendations: [
+        'Master algorithms - Google interviews are algorithm-heavy',
+        'Study distributed systems concepts (consistency, scalability, reliability)',
+        'Practice system design for large-scale applications',
+        'Contribute to open-source projects to demonstrate code quality'
+      ]
+    },
+    'amazon-sde': {
+      name: 'Amazon SDE',
+      available: true,
+      progress: 58,
+      skills: [
+        { name: 'Java/Python', current: 78, required: 85, status: 'good' },
+        { name: 'System Design', current: 62, required: 85, status: 'needs-work' },
+        { name: 'AWS Services', current: 55, required: 80, status: 'critical' },
+        { name: 'Distributed Systems', current: 50, required: 75, status: 'critical' },
+        { name: 'Leadership Principles', current: 70, required: 85, status: 'needs-work' },
+        { name: 'Code Quality & Testing', current: 68, required: 85, status: 'needs-work' },
+      ],
+      recommendations: [
+        'Study Amazon Leadership Principles - they\'re crucial for interviews',
+        'Get AWS certification (Solutions Architect or Developer)',
+        'Practice system design with focus on scalability and reliability',
+        'Prepare behavioral questions using Amazon\'s leadership principles'
+      ]
+    },
+    'apple-engineer': {
+      name: 'Apple Engineer',
+      available: true,
+      progress: 48,
+      skills: [
+        { name: 'Swift/Objective-C', current: 60, required: 85, status: 'critical' },
+        { name: 'iOS/macOS Development', current: 55, required: 85, status: 'critical' },
+        { name: 'UI/UX Design Principles', current: 65, required: 80, status: 'needs-work' },
+        { name: 'Performance Optimization', current: 58, required: 80, status: 'critical' },
+        { name: 'Memory Management', current: 62, required: 80, status: 'needs-work' },
+        { name: 'Human Interface Guidelines', current: 50, required: 75, status: 'critical' },
+      ],
+      recommendations: [
+        'Master Swift and iOS development fundamentals',
+        'Build polished iOS apps following Apple\'s design guidelines',
+        'Focus on performance optimization and memory management',
+        'Study Apple\'s Human Interface Guidelines thoroughly'
+      ]
+    },
+    'microsoft-engineer': {
+      name: 'Microsoft Engineer',
+      available: true,
+      progress: 55,
+      skills: [
+        { name: 'C#/.NET', current: 70, required: 85, status: 'needs-work' },
+        { name: 'Algorithms & Problem Solving', current: 72, required: 85, status: 'needs-work' },
+        { name: 'System Design', current: 58, required: 80, status: 'needs-work' },
+        { name: 'Azure Services', current: 50, required: 75, status: 'critical' },
+        { name: 'Software Engineering Practices', current: 68, required: 85, status: 'needs-work' },
+        { name: 'Collaboration & Teamwork', current: 75, required: 85, status: 'good' },
+      ],
+      recommendations: [
+        'Master C# and .NET framework fundamentals',
+        'Practice coding problems focusing on clean code and best practices',
+        'Learn Azure cloud services and deployment',
+        'Prepare for behavioral interviews emphasizing teamwork and collaboration'
+      ]
+    },
+    'google-intern': {
+      name: 'Google Intern',
+      available: true,
+      progress: 42,
+      skills: [
+        { name: 'Algorithms & Data Structures', current: 68, required: 85, status: 'needs-work' },
+        { name: 'C++/Java/Python', current: 72, required: 80, status: 'good' },
+        { name: 'Problem Solving', current: 65, required: 80, status: 'needs-work' },
+        { name: 'System Design Basics', current: 45, required: 70, status: 'critical' },
+        { name: 'Communication Skills', current: 75, required: 80, status: 'good' },
+        { name: 'Technical Writing', current: 60, required: 75, status: 'needs-work' },
+      ],
+      recommendations: [
+        'Focus on LeetCode medium and hard problems - Google interviews are challenging',
+        'Build projects that demonstrate problem-solving and coding skills',
+        'Practice explaining your thought process clearly during coding',
+        'Study Google\'s engineering culture and values'
+      ]
+    },
+    'amazon-intern': {
+      name: 'Amazon Intern',
+      available: true,
+      progress: 40,
+      skills: [
+        { name: 'Java/Python', current: 70, required: 80, status: 'needs-work' },
+        { name: 'Data Structures', current: 65, required: 80, status: 'needs-work' },
+        { name: 'Problem Solving', current: 62, required: 75, status: 'needs-work' },
+        { name: 'Leadership Principles', current: 55, required: 75, status: 'critical' },
+        { name: 'Communication Skills', current: 72, required: 80, status: 'good' },
+        { name: 'Team Collaboration', current: 68, required: 75, status: 'good' },
+      ],
+      recommendations: [
+        'Study Amazon\'s 14 Leadership Principles thoroughly',
+        'Practice coding problems with focus on clean, efficient solutions',
+        'Prepare STAR method stories for behavioral interviews',
+        'Build projects that showcase ownership and customer obsession'
+      ]
+    }
+  }
+
+  // Combine all roles for lookup
+  const allRoles = { ...generalRoles, ...companyRoles }
+
+  const currentRole = allRoles[selectedRole]
   const overallProgress = currentRole.progress
   const skillsData = currentRole.skills
   const recommendations = currentRole.recommendations
@@ -162,7 +295,7 @@ function App() {
   }
 
   const handleRoleSelect = (roleKey) => {
-    if (roleKey !== 'coming-soon' && jobRoles[roleKey].available) {
+    if (allRoles[roleKey] && allRoles[roleKey].available) {
       setSelectedRole(roleKey)
     }
   }
@@ -202,19 +335,37 @@ function App() {
           </div>
         </section>
 
-        {/* Career Goal Section */}
+        {/* General Career Roles Section */}
         <section className="card goal-section">
-          <h2>Select Your Career Goal</h2>
+          <h2>General Career Roles</h2>
+          <p className="section-description">Work towards front-end, back-end, or specialized roles</p>
           <div className="role-buttons-grid">
-            {Object.entries(jobRoles).map(([key, role]) => (
+            {Object.entries(generalRoles).map(([key, role]) => (
               <button
                 key={key}
-                className={`role-button ${selectedRole === key ? 'selected' : ''} ${!role.available ? 'coming-soon' : ''}`}
+                className={`role-button ${selectedRole === key ? 'selected' : ''}`}
                 onClick={() => handleRoleSelect(key)}
                 disabled={!role.available}
               >
                 <span className="role-name">{role.name}</span>
-                {!role.available && <span className="coming-soon-badge">Coming Soon</span>}
+              </button>
+            ))}
+          </div>
+        </section>
+
+        {/* Company-Specific Roles Section */}
+        <section className="card goal-section company-roles-section">
+          <h2>Company-Specific Roles</h2>
+          <p className="section-description">Target specific companies like Meta, Google, Amazon, and more</p>
+          <div className="role-buttons-grid">
+            {Object.entries(companyRoles).map(([key, role]) => (
+              <button
+                key={key}
+                className={`role-button ${selectedRole === key ? 'selected' : ''}`}
+                onClick={() => handleRoleSelect(key)}
+                disabled={!role.available}
+              >
+                <span className="role-name">{role.name}</span>
               </button>
             ))}
           </div>
